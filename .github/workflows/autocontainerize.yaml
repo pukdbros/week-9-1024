@@ -28,7 +28,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/simple-boilerplate-app:1.0.2
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/simple-boilerplate-app:latest
 
   deploy_to_k8s:
     name: Deploy to K8S

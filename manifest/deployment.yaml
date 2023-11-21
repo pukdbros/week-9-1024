@@ -23,6 +23,6 @@ spec:
     spec:
       containers:
         - name: simple-boilerplate-app-mee
-          image: pukdbros/simple-boilerplate-app:1.0.2
+          image: pukdbros/simple-boilerplate-app
           ports:
             - containerPort: 3000
