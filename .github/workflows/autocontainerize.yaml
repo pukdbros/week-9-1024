@@ -45,6 +45,6 @@ jobs:
     - name: Modify Manifest
       run: |
         export NAME_WITH_TAG=${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-        yq -i '.spec.template.spec.containers[0].image=strenv(NAME_WITH_TAG)' ./manifest/development.yaml
+        yq -i '.spec.template.spec.containers[0].image=strenv(NAME_WITH_TAG)' ./manifest/deployment.yaml
     - name: Deploy
       run: kubectl apply -f ./manifest/.
