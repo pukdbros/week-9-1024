@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: simple-boilerplate-app-mee-ingress
+  namespace: group-4
+  labels:
+    name: simple-boilerplate-app-mee-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: tcc-01.th1.proen.cloud
+    http:
+      paths:
+      - pathType: Prefix
+        path: /group-4-mee(/|$)(.*)
+        backend:
+          service:
+            name: simple-boilerplate-app-mee-service
+            port: 
+              number: 80

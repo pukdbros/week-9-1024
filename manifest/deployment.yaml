@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-boilerplate-app-mee-deployment
+  namespace: group-4
+  labels:
+    app: simple-boilerplate-app-mee-deployment
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 70%
+  selector:
+    matchLabels:
+      app: simple-boilerplate-app-mee-deployment
+  template:
+    metadata:
+      labels:
+        app: simple-boilerplate-app-mee-deployment
+    spec:
+      containers:
+        - name: simple-boilerplate-app-mee
+          image: pukdbros/simple-boilerplate-app:1.0.2
+          ports:
+            - containerPort: 3000
