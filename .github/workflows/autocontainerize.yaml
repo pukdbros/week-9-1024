@@ -40,3 +40,4 @@ jobs:
       run: ${{ secrets.KUBE_CONFIG }}
     - name: Deploy
       run: kubectl apply -f ./manifest/.
+      
