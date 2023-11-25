@@ -9,7 +9,7 @@ on:
       - develop
 
 env:
-  IMAGE_TAG: 1.2.0
+  IMAGE_TAG: $GITHUB.SHA
   IMAGE_NAME: pukdbros/simple-boilerplate-app
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/simple-boilerplate-app:1.2.0
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/simple-boilerplate-app:${{ GITHUB.SHA }}
 
   deploy_to_k8s:
     name: Deploy to K8S
@@ -44,7 +44,7 @@ jobs:
       run: ${{ secrets.KUBE_CONFIG }}
     - name: Modify Manifest
       run: |
-        export NAME_WITH_TAG=${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        export NAME_WITH_TAG=${{ env.IMAGE_NAME }}:${{ GITHUB.SHA }}
         yq -i '.spec.template.spec.containers[0].image=strenv(NAME_WITH_TAG)' ./manifest/deployment.yaml
     - name: Deploy
       run: kubectl apply -f ./manifest/.
